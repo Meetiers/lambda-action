@@ -112,30 +112,7 @@ jobs:
         dry_run: true
 ```
 
-Add multiple environment:
 
-```diff
-name: deploy to lambda
-on: [push]
-jobs:
-
-  deploy:
-    name: deploy lambda function
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: AWS Lambda Deploy
-      if: github.ref == 'refs/heads/master'
-      uses: appleboy/lambda-action@master
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_region: ${{ secrets.AWS_REGION }}
-        function_name: gorush
-        zip_file: output.zip
-        dry_run: true
-+       environment: foo=bar,author=appleboy
-```
 
 ## Input variables
 
@@ -157,7 +134,7 @@ See [action.yml](./action.yml) for more detailed information.
 * handler - The name of the method within your code that Lambda calls to execute your function.
 * role - The function's execution role. Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
 * runtime - The identifier of the function's runtime. `nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`
-* environment - Lambda Environment variables. example: `foo=bar,author=appleboy`
+* REMOVED FROM THIS FORK environment - Lambda Environment variables. example: `foo=bar,author=appleboy`
 
 See the [UpdateFunctionConfiguration](https://docs.amazonaws.cn/en_us/lambda/latest/dg/API_UpdateFunctionConfiguration.html) for detail information.
 
